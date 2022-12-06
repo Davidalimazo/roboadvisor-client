@@ -143,7 +143,7 @@ export default function Main() {
                     setValue(newValue)
                   }}
                 />
-                <span>4.7 Stars</span>
+                <span>{value} Stars</span>
               </div>
             </div>
           </div>
