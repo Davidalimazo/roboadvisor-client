@@ -15,14 +15,17 @@ import {useDispatch } from 'react-redux'
 import { setUser } from '../../reducer'
 import { useNavigate } from 'react-router-dom'
 import { apiRoutes } from '../apiRoutes'
+import { useFormik } from 'formik'
+import { registerSchema } from '../../schema/registerSchema'
+import ErrorDisplay from '../helper'
+
 
 
 export default function Main() {
   const [value, setValue] = React.useState<number | null>(5)
-  const [savingsPlan, setSavingsPlan] = useState('Saving goal')
   const [hidePassword, setHidePassword] = useState(false)
   const [isSubmited, setIsubmited] = useState(false)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState('')
 
   const dispatch = useDispatch()
   const navigate = useNavigate();
@@ -31,76 +34,50 @@ export default function Main() {
     (v: number, i: number) => (v = i++),
   )
 
-  const handleHidePassword = () => {
-    setHidePassword(!hidePassword)
-  }
-
-  const handleSavingsPlan = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSavingsPlan(e.target.value as string)
-  }
-  const [duration, setDuration] = useState('Daily')
-
-  const handleDuration = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDuration(e.target.value as string)
-  }
-  const [risk, setRisk] = useState<number | null>(0)
-
-  const handleRisk = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRisk((e.target.value as unknown) as number)
-  }
-
-  const initialState = {
-    name: '',
-    amount: '',
-    email: '',
-    password: '',
-  }
-  const [data, setData] = useState(initialState)
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { name, value },
-    } = e
-    setData({
-      ...data,
-      [name]: value,
-    })
-  }
-  const handleSubmit = async () => {
+  const onSubmit = async () => {
+   
+    console.log('clicked')
     setIsubmited(true)
-    setError(false)
-    if (
-      data.name &&
-      duration &&
-      savingsPlan &&
-      data.amount &&
-      risk &&
-      data.email &&
-      data.password
-    ) {
-      const request = {
-        name: data.name,
-        duration,
-        riskScore: risk,
-        goal: savingsPlan,
-        amount: data.amount,
-        password: data.password,
-        email: data.email,
-      }
 
      const url = apiRoutes.register;
       await axios
-        .post(url, request)
+        .post(url, values)
         .then((res) =>{ 
           dispatch(setUser(res.data))
           navigate('/portfolio')
         })
-        .catch((err) => console.log(err?.message))
-    } else {
-      setError(true)
-      setIsubmited(false)
-    }
+        .catch((err) =>{ 
+          setIsubmited(false)
+          setError(err?.message)
+          console.log(err?.message)})
   }
+
+  const {
+    values,
+    errors,
+    handleBlur,
+    handleChange:formikHandleChange,
+    handleSubmit,
+  } = useFormik({
+    initialValues: {
+      name:"",
+        duration:"",
+        riskScore: 0,
+        goal: "",
+        amount: "",
+        password: "",
+        email: "",
+    },
+    validationSchema: registerSchema,
+    onSubmit,
+  });
+
+
+  const handleHidePassword = () => {
+    setHidePassword(!hidePassword)
+  }
+
+
 
   return (
     <div className="main">
@@ -158,23 +135,30 @@ export default function Main() {
         }}
       >
         <div className="register_container">
+          <form onSubmit={handleSubmit}>
           <div className="title">Get Automated Financial service</div>
           <TextField
             placeholder="Name"
             fullWidth
             name="name"
-            onChange={handleChange}
-            error={error}
+            value={values.name}
+            onBlur={handleBlur}
+            helperText={<ErrorDisplay string={errors.name}/>}
+            onChange={formikHandleChange}
+            error={errors.name?.length === 0}
           />
           <TextField
             type="text"
             label="Choose your savings plan type"
             select
-            value={savingsPlan}
-            onChange={handleSavingsPlan}
+            name='goal'
+            value={errors.goal}
+            helperText={<ErrorDisplay string={errors.goal}/>}
+            onBlur={handleBlur}
+            onChange={formikHandleChange}
+            error={errors.goal === ''}
             fullWidth
             variant="outlined"
-            error={error}
           >
             <MenuItem value="Simple funding">Simple funding</MenuItem>
             <MenuItem value="Saving goal">Saving goal</MenuItem>
@@ -184,13 +168,16 @@ export default function Main() {
           </TextField>
           <TextField
             type="text"
+            helperText={<ErrorDisplay string={errors.duration}/>}
             label="How will you like to save?"
             select
-            value={duration}
-            onChange={handleDuration}
+            name='duration'
+            value={values.duration}
+            onBlur={handleBlur}
+            onChange={formikHandleChange}
+            error={errors.duration === ''}
             fullWidth
             variant="outlined"
-            error={error}
           >
             <MenuItem value="Daily">Daily</MenuItem>
             <MenuItem value="Weekly">Weekly</MenuItem>
@@ -200,18 +187,24 @@ export default function Main() {
             placeholder="Amount"
             name="amount"
             fullWidth
-            onChange={handleChange}
-            error={error}
+            helperText={<ErrorDisplay string={errors.amount}/>}
+            value={values.amount}
+            onBlur={handleBlur}
+            onChange={formikHandleChange}
+            error={errors.amount === ''}
           />
           <TextField
             type="text"
             label="Choose Risk tolerance"
             select
-            value={risk}
-            onChange={handleRisk}
+            name='riskScore'
+            helperText={<ErrorDisplay string={errors.riskScore}/>}
+            value={values.riskScore}
+            onBlur={handleBlur}
+            onChange={formikHandleChange}
+            error={errors.riskScore === null}
             fullWidth
             variant="outlined"
-            error={error}
           >
             {riskScore.map((v) => (
               <MenuItem value={v} key={v}>
@@ -222,18 +215,24 @@ export default function Main() {
           <TextField
             placeholder="Email Address"
             fullWidth
-            type="email"
-            name="email"
-            onChange={handleChange}
-            error={error}
+            type="text" 
+            helperText={<ErrorDisplay string={errors.email}/>}
+            name='email'
+            value={values.email}
+            onBlur={handleBlur}
+            onChange={formikHandleChange}
+            error={errors.email === ''}
           />
           <TextField
             name="password"
-            onChange={handleChange}
+            helperText={<ErrorDisplay string={errors.password}/>}
+            value={values.password}
+            onBlur={handleBlur}
+            onChange={formikHandleChange}
+            error={errors.password === ''}
             placeholder="Set Password"
             fullWidth
             type={hidePassword ? 'text' : 'password'}
-            error={error}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end" style={{ cursor: 'pointer' }}>
@@ -247,11 +246,14 @@ export default function Main() {
             }}
           />
           <Button
-            text="Submit"
+            text="submit"
             colored={true}
-            onClick={handleSubmit}
             disabled={isSubmited}
           />
+          {
+            error.length > 0 && (<div>error</div>)
+          }
+          </form>
         </div>
       </div>
     </div>

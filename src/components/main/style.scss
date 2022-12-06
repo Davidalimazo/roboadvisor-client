@@ -64,6 +64,7 @@
     .main_right{
         flex: 1;
         .register_container{
+            form{
             @include justFlex(column);
             padding: 15px;
             gap: 2rem;
@@ -85,6 +86,7 @@
             }
         }
     }
+}
 }
 
 @include max_mobile(768px){
@@ -110,6 +112,7 @@
         .main_right{
             flex: 1;
             .register_container{
+                form{
                 @include justFlex(column);
                 padding: 10px;
                 gap: 2rem;
@@ -117,6 +120,7 @@
                 width: 95%;
                 height: 811px;
     }
+}
         }
     }
 }
