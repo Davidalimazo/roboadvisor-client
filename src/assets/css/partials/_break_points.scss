@@ -1,0 +1,11 @@
+@mixin min_mobile($width){
+    @media (min-width: $width) {
+        @content;
+    }
+}
+
+@mixin max_mobile($bp) {
+    @media (max-width: $bp) {
+        @content;
+    }
+}

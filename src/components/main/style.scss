@@ -1,0 +1,122 @@
+@import '../../assets/css/partials/break_points';
+@import '../../assets/css/partials/functions';
+
+.main{
+    padding: 20px;
+    @include justFlex(row);
+    gap: 3rem;
+    .main_left{
+        margin-top: 10rem;
+        @include justFlex(column);
+        gap: 2rem;
+        flex: 1.5;
+        .main_title{
+            font-family: Montserrat, serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 60px;
+            line-height: 80px;
+            letter-spacing: -0.03em;
+            color: #FFFFFF;
+        }
+        .main_text{
+            font-family: Montserrat, serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 24px;
+            color: #E2E2E8;
+        }
+        .main_btns{
+            @include justFlex(row);
+            align-items: center;
+            gap: 3rem;
+        }
+        .main_stat{
+            margin-top: 5rem;
+            @include justFlex(row);
+            gap: 3rem;
+            align-items: center;
+            .main_stat_icon_container{
+                @include justFlex(row);
+                align-items: center;
+                gap: 1rem;
+                .img_container{
+                    width: 71px;
+                    height: 57px;
+                    background: rgba(46, 130, 109, 0.15);
+                    border-radius: 20px;
+                    @include justFlex(row);
+                    align-items: center;
+                    justify-content: center
+                }
+                .main_stat_detail{
+                    @include justFlex(column);
+                    gap: 1rem;
+                    .rating{
+                        @include justFlex(row);
+                        gap: 1rem;
+                    }
+                }
+            }
+        }
+    }
+    .main_right{
+        flex: 1;
+        .register_container{
+            @include justFlex(column);
+            padding: 15px;
+            gap: 2rem;
+            margin-top: 13rem;
+            width: 402px;
+            height: 811px;
+            background: #FFFFFF;
+            border-radius: 40px;
+            .title{
+                padding-top: 1rem;
+                text-align: center;
+                font-family: Montserrat, serif;
+                font-style: italic;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 140%;
+                text-decoration-line: underline;
+                color: #1A5443;
+            }
+        }
+    }
+}
+
+@include max_mobile(768px){
+    .main{
+        padding: 10px;
+        width: 90%;
+        overflow: hidden;
+        @include justFlex(column);
+        .main_title{
+            font-weight: 400 !important;
+            font-size: 30px !important;
+            line-height: 40px !important;
+        }
+        .main_left{
+            .main_btns{
+                    gap: 1rem;
+            }
+            .main_stat{
+                gap: 1rem;
+                flex-direction: column;
+            }
+        }
+        .main_right{
+            flex: 1;
+            .register_container{
+                @include justFlex(column);
+                padding: 10px;
+                gap: 2rem;
+                margin-top: 10rem;
+                width: 95%;
+                height: 811px;
+    }
+        }
+    }
+}

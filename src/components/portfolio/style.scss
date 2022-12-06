@@ -1,0 +1,116 @@
+@import '../../assets/css/partials/break_points';
+@import '../../assets/css/partials/functions';
+
+.portfolio{
+    @include justFlex(column);
+    color: black;
+    align-items: center;
+    .container{
+        @include justFlex(column);
+        align-items: center;
+        margin-top: 10rem;
+        width: 614px;
+        height: 760px;
+        left: calc(50% - 614px/2);
+        background: #FFFFFF;
+        border-radius: 40px;
+        .username{
+            margin-top: 3rem;
+            font-family: Montserrat, serif;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 28px;
+            letter-spacing: -0.03em;
+            color: #1A5443;
+        }
+        .small_text{
+            font-family: Montserrat, serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 10px;
+            line-height: 16px;
+            color: #212121;
+        }
+        .top_bar{
+            width: 514px;
+            height: 151px;
+            left: 0px;
+            top: 60px;
+            background: #E5F1E6;
+            border-radius: 20px;
+            .top_bar_title{
+                @include justFlex(row);
+                align-items: center;
+                padding: 10px;
+                .title{
+                    margin-right: auto;
+                    font-family: Montserrat, serif;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 18px;
+                    line-height: 32px;
+                    letter-spacing: -0.03em;
+                    color: #192252;
+                }
+            }
+            .balance_container{
+                @include justFlex(row);
+                gap: 1rem;
+                padding: 10px;
+            }
+            .portfolio_btns{
+                @include justFlex(row);
+                gap: 2rem;
+                padding: 10px;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        .investment_advise{
+            @include justFlex(column);
+            gap: 1rem;
+            padding: 10px;
+            .invest_title{
+                font-family: Montserrat, serif;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 32px;
+                letter-spacing: -0.03em;
+                color: #192252;
+            }
+            .advice_data{
+                @include justFlex(column);
+                gap: 2rem;
+                margin-top: 2rem;
+                .advice{
+                    @include justFlex(row);
+                    .advice_name{
+                        margin-right: auto;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+@include max_mobile(768px){
+    .portfolio{
+        align-items: center;
+        .container{
+            margin-top: 10rem;
+            width: 90%;
+            background: #FFFFFF;
+            border-radius: 40px;
+            .top_bar{
+                width: 314px;
+                height: 151px;
+                left: 0px;
+                top: 60px;
+            }
+        }
+    }
+    
+}

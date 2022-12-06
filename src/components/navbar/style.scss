@@ -1,0 +1,52 @@
+@import '../../assets/css/partials/break_points';
+@import '../../assets/css/partials/functions';
+.navbar{
+    @include flex(row, center);
+    position: relative;
+    padding: 20px;
+    .left{
+        margin-right: auto;
+        font-family: Balthazar, serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 30px;
+        line-height: 32px;
+        text-transform: uppercase;
+        color: #FFFFFF;
+    }
+    .right{
+        @include flex(row, center);
+        gap: 3rem;
+        .links{
+            @include flex(row, center);
+            gap: 1rem;
+            .underline_active{
+               font-size: 20px;
+               color: #96C93D;
+               ;
+            }
+            a{
+                font-family: Montserrat, serif;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 32px;
+                color: #EFEFEF;
+            }
+        }
+    }
+    .mobile_menu_open{
+        display: none;
+    }
+}
+
+@include max_mobile(768px){
+    .navbar{
+        .right, .left{
+            display: none;
+        }
+        .mobile_menu_open{
+            display: none;
+        }
+    }
+}

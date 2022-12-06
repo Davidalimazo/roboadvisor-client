@@ -1,0 +1,13 @@
+@import './partials/break_points';
+.App{
+    background: #1A5443;
+    width: 1280px;
+    min-height: 100vh;
+}
+@include max_mobile(768px){
+    .App{
+        background: #1A5443;
+        width: 100vw;
+        min-height: 100vh;
+    }
+}

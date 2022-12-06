@@ -1,0 +1,52 @@
+@import '../../assets/css/partials/break_points';
+@import '../../assets/css/partials/functions';
+
+.mobile_menu{
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+    height: 280px;
+    position: absolute;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    .top{
+        @include flex(row, center);
+        padding: 10px;
+        background: linear-gradient(90deg, #00B09B 0%, #96C93D 110.38%, #96C93D 110.38%);
+        .logo{
+            margin-right: auto;
+            margin-right: auto;
+            font-family: Balthazar, serif;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 25px;
+            line-height: 22px;
+            text-transform: uppercase;
+            color: #FFFFFF;
+        }
+    }
+    .links{
+        padding: 10px;
+        @include flex(column, center);
+        gap: 1rem;
+        background: linear-gradient(90deg, #00B09B 0%, #96C93D 110.38%, #96C93D 110.38%);
+        .underline_active{
+            font-size: 20px;
+            color: #1d1206;
+            ;
+         }
+    }
+    .btn{
+        @include flex(row, center);
+        justify-content: center;
+    }
+.closeLinks{
+    display: none;
+}
+}
+@include min_mobile(769px){
+    .mobile_menu{
+        display: none;
+    }
+}
