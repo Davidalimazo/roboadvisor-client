@@ -8,9 +8,8 @@
     .container{
         @include justFlex(column);
         align-items: center;
-        margin-top: 10rem;
+        margin-top: 3rem;
         width: 614px;
-        height: 760px;
         left: calc(50% - 614px/2);
         background: #FFFFFF;
         border-radius: 40px;
@@ -82,8 +81,8 @@
             }
             .advice_data{
                 @include justFlex(column);
-                gap: 2rem;
-                margin-top: 2rem;
+                gap: 1rem;
+                margin-top: 1rem;
                 .advice{
                     @include justFlex(row);
                     .advice_name{

@@ -12,7 +12,6 @@ import useWindowSize from '../../hooks/useWindowSize'
 
 export default function PortFolio() {
   const width = useWindowSize()
-  const [hidebalance, setHidebalance] = React.useState(false)
   const [hidePassword, setHidePassword] = useState(false)
 
   const user = useSelector((state: RootState) => state.user.data)
@@ -71,13 +70,49 @@ export default function PortFolio() {
                 </div>
                 <div className="advice">
                     <div className='advice_name'>Amount</div>
-                    <div className='advice_value'>&#8358;{user?.amount}</div>
+                    <div className='advice_value'>{user?.amount}</div>
+                </div>
+                <div className="advice">
+                    <div className='advice_name'>Nigerian Stocks</div>
+                    <div className='advice_value'>{user?.advice?.nigerianStocks}</div>
+                </div>
+                <div className="advice">
+                    <div className='advice_name'>Foriegn Stocks</div>
+                    <div className='advice_value'>{user?.advice?.foriegnStock}</div>
+                </div>
+                <div className="advice">
+                    <div className='advice_name'>Tech Stocks</div>
+                    <div className='advice_value'>{user?.advice?.techStocks}</div>
+                </div>
+                <div className="advice">
+                    <div className='advice_name'>Nigerian Bonds</div>
+                    <div className='advice_value'>{user?.advice?.nigerianBonds}</div>
+                </div>
+                <div className="advice">
+                    <div className='advice_name'>Foriegn Bonds</div>
+                    <div className='advice_value'>{user?.advice?.foriegnBonds}</div>
+                </div>
+                <div className="advice">
+                    <div className='advice_name'>Commodities</div>
+                    <div className='advice_value'>{user?.advice?.commodities}</div>
+                </div>
+                <div className="advice">
+                    <div className='advice_name'>Real Estate</div>
+                    <div className='advice_value'>{user?.advice?.realEstate}</div>
+                </div>
+                <div className="advice">
+                    <div className='advice_name'>T-Bills</div>
+                    <div className='advice_value'>{user?.advice?.tBills}</div>
+                </div>
+                <div className="advice">
+                    <div className='advice_name'>Alternative</div>
+                    <div className='advice_value'>{user?.advice?.alternative}</div>
                 </div>
             </div>
           </div>
           <div className="new_savings_plan">
           <Button text='Add a New Saving plan type' icon={plusIcon} style={{
-             marginTop: "5rem",
+             marginTop: "2rem",
              padding: "10px 16px",
              width: "234px",
              height: "40px",
