@@ -18,7 +18,7 @@ import { apiRoutes } from '../apiRoutes'
 
 
 export default function Main() {
-  const [value, setValue] = React.useState<number | null>(2)
+  const [value, setValue] = React.useState<number | null>(5)
   const [savingsPlan, setSavingsPlan] = useState('Saving goal')
   const [hidePassword, setHidePassword] = useState(false)
   const [isSubmited, setIsubmited] = useState(false)
